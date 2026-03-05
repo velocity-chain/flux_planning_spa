@@ -6,7 +6,7 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      redirect: '/{{ service.data_domains.controls[0] | lower }}s'
+      redirect: '/scenarios'
     },
     {
       path: '/login',
@@ -14,63 +14,125 @@ const router = createRouter({
       component: () => import('@/pages/LoginPage.vue'),
       meta: { requiresAuth: false }
     },
-    {% for item in service.data_domains.controls %}
-    // Control domain: {{ item }}
+    
+    // Control domain: Scenario
     {
-      path: '/{{ item | lower }}s',
-      name: '{{ item }}s',
-      component: () => import('@/pages/{{ item }}sListPage.vue'),
+      path: '/scenarios',
+      name: 'Scenarios',
+      component: () => import('@/pages/ScenariosListPage.vue'),
       meta: { requiresAuth: true }
     },
     {
-      path: '/{{ item | lower }}s/new',
-      name: '{{ item }}New',
-      component: () => import('@/pages/{{ item }}NewPage.vue'),
+      path: '/scenarios/new',
+      name: 'ScenarioNew',
+      component: () => import('@/pages/ScenarioNewPage.vue'),
       meta: { requiresAuth: true }
     },
     {
-      path: '/{{ item | lower }}s/:id',
-      name: '{{ item }}Edit',
-      component: () => import('@/pages/{{ item }}EditPage.vue'),
+      path: '/scenarios/:id',
+      name: 'ScenarioEdit',
+      component: () => import('@/pages/ScenarioEditPage.vue'),
       meta: { requiresAuth: true }
     },
-    {% endfor %}
-    {% for item in service.data_domains.creates %}
-    // Create domain: {{ item }}
+    
+    // Control domain: Demand
     {
-      path: '/{{ item | lower }}s',
-      name: '{{ item }}s',
-      component: () => import('@/pages/{{ item }}sListPage.vue'),
-      meta: { requiresAuth: true }
-    },
-    {
-      path: '/{{ item | lower }}s/new',
-      name: '{{ item }}New',
-      component: () => import('@/pages/{{ item }}NewPage.vue'),
+      path: '/demands',
+      name: 'Demands',
+      component: () => import('@/pages/DemandsListPage.vue'),
       meta: { requiresAuth: true }
     },
     {
-      path: '/{{ item | lower }}s/:id',
-      name: '{{ item }}View',
-      component: () => import('@/pages/{{ item }}ViewPage.vue'),
-      meta: { requiresAuth: true }
-    },
-    {% endfor %}
-    {% for item in service.data_domains.consumes %}
-    // Consume domain: {{ item }}
-    {
-      path: '/{{ item | lower }}s',
-      name: '{{ item }}s',
-      component: () => import('@/pages/{{ item }}sListPage.vue'),
+      path: '/demands/new',
+      name: 'DemandNew',
+      component: () => import('@/pages/DemandNewPage.vue'),
       meta: { requiresAuth: true }
     },
     {
-      path: '/{{ item | lower }}s/:id',
-      name: '{{ item }}View',
-      component: () => import('@/pages/{{ item }}ViewPage.vue'),
+      path: '/demands/:id',
+      name: 'DemandEdit',
+      component: () => import('@/pages/DemandEditPage.vue'),
       meta: { requiresAuth: true }
     },
-    {% endfor %}
+    
+    
+    // Create domain: Optimization
+    {
+      path: '/optimizations',
+      name: 'Optimizations',
+      component: () => import('@/pages/OptimizationsListPage.vue'),
+      meta: { requiresAuth: true }
+    },
+    {
+      path: '/optimizations/new',
+      name: 'OptimizationNew',
+      component: () => import('@/pages/OptimizationNewPage.vue'),
+      meta: { requiresAuth: true }
+    },
+    {
+      path: '/optimizations/:id',
+      name: 'OptimizationView',
+      component: () => import('@/pages/OptimizationViewPage.vue'),
+      meta: { requiresAuth: true }
+    },
+    
+    
+    // Consume domain: Organization
+    {
+      path: '/organizations',
+      name: 'Organizations',
+      component: () => import('@/pages/OrganizationsListPage.vue'),
+      meta: { requiresAuth: true }
+    },
+    {
+      path: '/organizations/:id',
+      name: 'OrganizationView',
+      component: () => import('@/pages/OrganizationViewPage.vue'),
+      meta: { requiresAuth: true }
+    },
+    
+    // Consume domain: Product
+    {
+      path: '/products',
+      name: 'Products',
+      component: () => import('@/pages/ProductsListPage.vue'),
+      meta: { requiresAuth: true }
+    },
+    {
+      path: '/products/:id',
+      name: 'ProductView',
+      component: () => import('@/pages/ProductViewPage.vue'),
+      meta: { requiresAuth: true }
+    },
+    
+    // Consume domain: Supplier
+    {
+      path: '/suppliers',
+      name: 'Suppliers',
+      component: () => import('@/pages/SuppliersListPage.vue'),
+      meta: { requiresAuth: true }
+    },
+    {
+      path: '/suppliers/:id',
+      name: 'SupplierView',
+      component: () => import('@/pages/SupplierViewPage.vue'),
+      meta: { requiresAuth: true }
+    },
+    
+    // Consume domain: Analytics
+    {
+      path: '/analyticss',
+      name: 'Analyticss',
+      component: () => import('@/pages/AnalyticssListPage.vue'),
+      meta: { requiresAuth: true }
+    },
+    {
+      path: '/analyticss/:id',
+      name: 'AnalyticsView',
+      component: () => import('@/pages/AnalyticsViewPage.vue'),
+      meta: { requiresAuth: true }
+    },
+    
     // Admin route
     {
       path: '/admin',
@@ -94,7 +156,7 @@ router.beforeEach((to, _from, next) => {
   const requiredRole = to.meta.requiresRole as string | undefined
   if (requiredRole && !hasStoredRole(requiredRole)) {
     // Redirect to default page if user doesn't have required role
-    next({ name: '{{ service.data_domains.controls[0] }}s' })
+    next({ name: 'Scenarios' })
     return
   }
   
@@ -102,7 +164,7 @@ router.beforeEach((to, _from, next) => {
 })
 
 router.afterEach((to) => {
-  document.title = to.path === '/login' ? '{{info.name}} Login' : '{{service.name | capitalize}}'
+  document.title = to.path === '/login' ? 'Velocity Chain Login' : 'Planning'
 })
 
 export default router

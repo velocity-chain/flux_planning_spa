@@ -7,7 +7,7 @@
         data-automation-id="nav-drawer-toggle"
         aria-label="Open navigation drawer"
       />
-      <v-app-bar-title>{{service.name | capitalize}}</v-app-bar-title>
+      <v-app-bar-title>Planning</v-app-bar-title>
     </v-app-bar>
 
     <v-navigation-drawer
@@ -16,49 +16,89 @@
       temporary
     >
       <v-list density="compact" nav>
-        {% for item in service.data_domains.controls %}
-        <v-list-subheader>{{ item | upper }} DOMAIN</v-list-subheader>
+        
+        <v-list-subheader>SCENARIO DOMAIN</v-list-subheader>
         <v-list-item
-          to="/{{ item | lower }}s"
+          to="/scenarios"
           prepend-icon="mdi-view-list"
-          title="List {{ item }}s"
-          data-automation-id="nav-{{ item | lower }}s-list-link"
+          title="List Scenarios"
+          data-automation-id="nav-scenarios-list-link"
         />
         <v-list-item
-          to="/{{ item | lower }}s/new"
+          to="/scenarios/new"
           prepend-icon="mdi-plus"
-          title="New {{ item }}"
-          data-automation-id="nav-{{ item | lower }}s-new-link"
+          title="New Scenario"
+          data-automation-id="nav-scenarios-new-link"
         />
 
         <v-divider class="my-2" />
-        {% endfor %}
-        {% for item in service.data_domains.creates %}
-        <v-list-subheader>{{ item | upper }} DOMAIN</v-list-subheader>
+        
+        <v-list-subheader>DEMAND DOMAIN</v-list-subheader>
         <v-list-item
-          to="/{{ item | lower }}s"
+          to="/demands"
           prepend-icon="mdi-view-list"
-          title="List {{ item }}s"
-          data-automation-id="nav-{{ item | lower }}s-list-link"
+          title="List Demands"
+          data-automation-id="nav-demands-list-link"
         />
         <v-list-item
-          to="/{{ item | lower }}s/new"
+          to="/demands/new"
           prepend-icon="mdi-plus"
-          title="New {{ item }}"
-          data-automation-id="nav-{{ item | lower }}s-new-link"
+          title="New Demand"
+          data-automation-id="nav-demands-new-link"
         />
 
         <v-divider class="my-2" />
-        {% endfor %}
-        {% for item in service.data_domains.consumes %}
-        <v-list-subheader>{{ item | upper }} DOMAIN</v-list-subheader>
+        
+        
+        <v-list-subheader>OPTIMIZATION DOMAIN</v-list-subheader>
         <v-list-item
-          to="/{{ item | lower }}s"
+          to="/optimizations"
           prepend-icon="mdi-view-list"
-          title="List {{ item }}s"
-          data-automation-id="nav-{{ item | lower }}s-list-link"
+          title="List Optimizations"
+          data-automation-id="nav-optimizations-list-link"
         />
-        {% endfor %}
+        <v-list-item
+          to="/optimizations/new"
+          prepend-icon="mdi-plus"
+          title="New Optimization"
+          data-automation-id="nav-optimizations-new-link"
+        />
+
+        <v-divider class="my-2" />
+        
+        
+        <v-list-subheader>ORGANIZATION DOMAIN</v-list-subheader>
+        <v-list-item
+          to="/organizations"
+          prepend-icon="mdi-view-list"
+          title="List Organizations"
+          data-automation-id="nav-organizations-list-link"
+        />
+        
+        <v-list-subheader>PRODUCT DOMAIN</v-list-subheader>
+        <v-list-item
+          to="/products"
+          prepend-icon="mdi-view-list"
+          title="List Products"
+          data-automation-id="nav-products-list-link"
+        />
+        
+        <v-list-subheader>SUPPLIER DOMAIN</v-list-subheader>
+        <v-list-item
+          to="/suppliers"
+          prepend-icon="mdi-view-list"
+          title="List Suppliers"
+          data-automation-id="nav-suppliers-list-link"
+        />
+        
+        <v-list-subheader>ANALYTICS DOMAIN</v-list-subheader>
+        <v-list-item
+          to="/analyticss"
+          prepend-icon="mdi-view-list"
+          title="List Analyticss"
+          data-automation-id="nav-analyticss-list-link"
+        />
+        
       </v-list>
 
       <template v-slot:append>
